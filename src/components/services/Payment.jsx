@@ -16,6 +16,7 @@ import YouWhoLoading from '../misc/YouWhoLoading';
 import ReactStars from "react-rating-stars-component";
 import Moralis from "moralis";
 import { useMoralis } from "react-moralis";
+import AvaxLogo from '../../assets/svg/AvaxLogo';
 
 
 
@@ -34,7 +35,7 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
     const [newPayment, setNewPayment] = useState("");
     const [myYouusdAllowance, setMyYouusdAllowance] = useState(0);
     const { siteIsLoading2, setSiteIsLoading2, siteIsLoading, setSiteIsLoading, siteIsLoading3, setSiteIsLoading3 } = useContext(SiteStateContext);
-    const [crypto, setCrypto] = useState("ETH");
+    const [crypto, setCrypto] = useState("AVAX");
     const [cryptoPrice, setCryptoPrice] = useState("");
     const [cryptoDecimals, setCryptoDecimals] = useState(8);
     const [reviewRating, setReviewRating] = useState(35);
@@ -45,8 +46,8 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
     // console.log("bookingPublic", bookingPublic.id);
     // console.log("bookingStatus", bookingStatus);
     // console.log("provider", provider);
-    console.log("myYouusdAllowance", myYouusdAllowance);
-    console.log("ethAddresse", ethAddress);
+    // console.log("myYouusdAllowance", myYouusdAllowance);
+    // console.log("ethAddresse", ethAddress);
 
 
     useEffect(() => {
@@ -147,7 +148,7 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
                 setYouDapp(youDappC);
                 // console.log('youDapp contract: ', youDappC);
 
-                await youDappC.methods.tokenMapping(web3.utils.asciiToHex(crypto)).call({ from: account }).then(async (result) => {
+                youDappC.methods.tokenMapping(web3.utils.asciiToHex(crypto)).call({ from: account }).then(async (result) => {
                     setCryptoDecimals(result["manualOracleDecimals"]);
                     const aggregatorV3InterfaceABI = [{ "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "description", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint80", "name": "_roundId", "type": "uint80" }], "name": "getRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "latestRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "version", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }];
                     const addr = result["oracleAddress"];
@@ -236,9 +237,9 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
 
             try {
                 setSiteIsLoading(true);
-                if (crypto === "ETH") {
+                if (crypto === "AVAX") {
                     let amount = String(paymentAmount / cryptoPrice);
-                    console.log("amount pay eth", amount);
+                    console.log("amount pay avax", amount);
                     await youDapp.methods.makePaymentEth(ethAddress, web3.utils.asciiToHex(bookingId), reviewRating).send({ value: web3.utils.toWei(amount), from: account }).then(async (result) => {
                         await Moralis.Cloud.run("setPaymentAmount", { paymentAmount, bookingPublic: bookingPublic.id, crypto, paymentCrypto: paymentAmount / cryptoPrice, priceAtTime: cryptoPrice });
                         setNewPayment(result);
@@ -309,12 +310,12 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
     }, [rateAgreed, durationHours])
 
 
-    const options = ["ETH", "YOUUSD"]
-    const icon = [<Icon as={FaI.FaEthereum} mb="4px" mr="4px" />, <Icon as={FaI.FaDollarSign} mb="4px" mr="2px" />]
+    const options = ["AVAX", "YOUUSD"]
+    const icon = [<AvaxLogo />, <Icon as={FaI.FaDollarSign} mb="4px" mr="2px" />]
 
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "Crypto",
-        defaultValue: "ETH",
+        defaultValue: "AVAX",
         onChange: setCrypto,
         value: crypto,
     })
@@ -475,7 +476,7 @@ function PayNow({ siteIsLoading, paymentSuccess, grayText, history, bookingId, p
                                 <Button colorScheme="primary" onClick={() => { onClose(); history.push(`/activity/you/booked/${bookingId}`); window.location.reload(); }}>OK</Button>
                             </ModalFooter>
                         </>
-                    ) : ((myYouusdAllowance > (paymentAmount / cryptoPrice) || crypto === "ETH") ?
+                    ) : ((myYouusdAllowance > (paymentAmount / cryptoPrice) || crypto === "AVAX") ?
                         <>
                             <ModalHeader px={["4", "6", "", ""]} pt={6} pb={4} fontWeight="400" bg="gray.10"><Icon as={RiI.RiHandCoinLine} color="secondary.300" mb="5px" mr={2} h="24px" w="24px" />Confirm Payment Details</ModalHeader>
                             <ModalCloseButton m={3} onClick={() => { onClose(); }} />
@@ -538,7 +539,7 @@ function PayNow({ siteIsLoading, paymentSuccess, grayText, history, bookingId, p
                             <ModalFooter pb={6} px={6} bg="gray.10" >
                                 <Stack spacing="3">
                                     <Text>Press Confirm below, to send payment to <Text as="span" color="secondary.300" fontWeight="600">{providerName}</Text>.</Text>
-                                    <Text as="i" color={grayText} fontSize="sm">Note that it may take up to a few minutes for your transaction to be processed depending on how congested the Ethereum network is, please be patient, you payment will be processed in time.</Text>
+                                    <Text as="i" color={grayText} fontSize="sm">Note that it may take up to a few seconds for your transaction to be processed depending on how congested the Avalanche test network is, please be patient, you payment will be processed in time.</Text>
                                     {!confirmBooking ?
                                         <>
                                             <Button colorScheme="primary" onClick={() => setConfirmBooking(true)} mr={2} isLoading={siteIsLoading}><Icon as={Io5.IoRocketOutline} mr={1} h="20px" w="20px" /> Confirm?</Button>

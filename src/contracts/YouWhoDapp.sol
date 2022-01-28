@@ -90,12 +90,12 @@ contract YouWhoDapp is
         // tokenList.push(tickerYouusd);
 
 
-        // avalance fuji AVAX / USD
-        bytes32 tickerAvax = bytes32("AVAX");
+        // avalanche fuji AVAX / USD
+        bytes32 tickerAvax = bytes32("ETH"); // actually AVAX
         tokenMapping[tickerAvax] = Token(address(this), 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD, 61.24 * (10**8), 8);
         tokenList.push(tickerAvax);
 
-        // avalance fuji USDT / USD
+        // avalanche fuji USDT / USD
         bytes32 tickerYouusd = bytes32("YOUUSD");
         tokenMapping[tickerYouusd] = Token(_youusd, 0x7898AcCC83587C3C55116c5230C17a6Cd9C71bad, 1 * (10**8), 8);
         tokenList.push(tickerYouusd);

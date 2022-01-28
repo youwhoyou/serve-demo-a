@@ -95,7 +95,7 @@ export default function ViewBooking({ grayText, grayText2, history, bookedServic
                                         <Stack mr={4}>
                                             <Avatar as="button" size="xl" name={provider.attributes.username} src={provider.attributes.profile_photo ? provider.attributes.profile_photo._url : ""} onClick={() => history.push(`/chat/you/${booking.id}`)} />
                                             {bookingStatus !== "declined" &&
-                                                <Button mx={2} size="xs" minWidth="25%" color="teal.400" variant="ghost" onClick={() => history.push(`/chat/you/${booking.id}`)} ><Icon as={Io5.IoChatboxEllipsesOutline} w="24px" h="24px" mr={2} mt="1px" /> Chat</Button>
+                                                <Button mx={2} size="xs" minWidth="25%" color="teal.400" variant="ghost" onClick={() => history.push(`/chat/you/${booking.id}`)} style={{ display: "flex", alignItems: "center" }} ><Icon as={Io5.IoChatboxEllipsesOutline} w="24px" h="24px" mr={2} mt="1px" /> Chat</Button>
                                             }
                                         </Stack>
                                     </Center>
@@ -240,7 +240,7 @@ export default function ViewBooking({ grayText, grayText2, history, bookedServic
                                     bookingStatus === "pending" ?
                                         <>
                                             <Box px={2}>
-                                                <Text color="primary.400" lineHeight="22px" fontSize={["lg", "xl", "2xl", ""]} fontWeight="300"><Icon as={Io4.IoIosTimer} mb="2px" mr={1} />Awaiting Approval</Text>
+                                                <Text color="primary.400" lineHeight="22px" fontSize={["lg", "xl", "2xl", ""]} fontWeight="300" style={{ display: "flex", alignItems: "center" }}><Icon as={Io4.IoIosTimer} mb="2px" mr={1} />Awaiting Approval</Text>
                                             </Box>
                                         </>
                                         :
@@ -250,7 +250,7 @@ export default function ViewBooking({ grayText, grayText2, history, bookedServic
                                                     <Text color="primary.500" fontSize="3xl" fontWeight="600"><Text as="span" fontSize="xl">$</Text>{rateAgreed ? (rateAgreed * durationHours).toFixed(2) : ""}<Text as="span" fontSize="sm" color={grayText}> Total</Text></Text>
                                                 </Box>
                                                 <Spacer />
-                                                <Button w="42%" size="lg" color="green.500" bg="green.100" _hover={{ bg: "green.200" }} _focus={{ bg: "green.100" }} _active={{ bg: "green.100" }} borderRadius="md" onClick={() => history.push(`/activity/you/booked/${bookingId}/payment`)} ><Icon as={RiI.RiHandCoinLine} w="24px" h="24px" mr={2} mt="1px" /> Pay Now</Button>
+                                                <Button w="42%" size="lg" color="green.500" bg="green.100" _hover={{ bg: "green.200" }} _focus={{ bg: "green.100" }} _active={{ bg: "green.100" }} borderRadius="md" onClick={() => history.push(`/activity/you/booked/${bookingId}/payment`)} style={{ display: "flex", alignItems: "center" }} ><Icon as={RiI.RiHandCoinLine} w="24px" h="24px" mr={2} mt="1px" /> Pay Now</Button>
                                             </>
                                             :
                                             bookingStatus === "paid" ?
@@ -259,7 +259,7 @@ export default function ViewBooking({ grayText, grayText2, history, bookedServic
                                                         <Text color="green.400" lineHeight="22px" fontSize={["lg", "xl", "2xl", ""]} fontWeight="300">Paid <Text as="span" fontWeight="600">${paidAmountUsd}</Text></Text>
                                                     </Box>
                                                     <Spacer />
-                                                    <Button color="primary.600" bg="primary.100" _hover={{ bg: "primary.200" }} _focus={{ bg: "primary.100" }} _active={{ bg: "primary.100" }} borderRadius="md" onClick={() => history.push(`/wallet/history/${bookingId}`)} ><Icon as={BsI.BsListCheck} w="24px" h="24px" mr={2} mt="1px" /> View Payment Details</Button>
+                                                    <Button color="primary.600" bg="primary.100" _hover={{ bg: "primary.200" }} _focus={{ bg: "primary.100" }} _active={{ bg: "primary.100" }} borderRadius="md" onClick={() => history.push(`/wallet/history/${bookingId}`)} style={{ display: "flex", alignItems: "center" }}><Icon as={BsI.BsListCheck} w="24px" h="24px" mr={2} mt="1px" /> View Payment Details</Button>
                                                 </>
                                                 :
                                                 <>

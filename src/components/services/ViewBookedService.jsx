@@ -292,18 +292,18 @@ export default function ViewBookedService({ setReloadPage, grayText, grayText2, 
                                         <>
                                             <ConfirmApproval handleBookingApproved={handleBookingApproved} siteIsLoading={siteIsLoading} />
                                             <Spacer />
-                                            <Button color="primary.600" bg="primary.200" _hover={{ bg: "primary.300" }} _focus={{ bg: "primary.200" }} _active={{ bg: "primary.200" }} borderRadius="md" onClick={() => setDisableEdit(false)} ><Icon as={Io5.IoHammerOutline} w="24px" h="24px" mr={2} mt="1px" /> Edit</Button>
+                                            <Button color="primary.600" bg="primary.200" _hover={{ bg: "primary.300" }} _focus={{ bg: "primary.200" }} _active={{ bg: "primary.200" }} borderRadius="md" onClick={() => setDisableEdit(false)} style={{ display: "flex", alignItems: "center" }}><Icon as={Io5.IoHammerOutline} w="24px" h="24px" mr={2} mt="1px" /> Edit</Button>
                                             <Spacer />
                                             <ConfirmDecline handleBookingDeclined={handleBookingDeclined} siteIsLoading={siteIsLoading} />                                        </>
                                         :
                                         <>
-                                            <Button color="secondary.500" bg="secondary.100" _hover={{ bg: "secondary.200" }} _focus={{ bg: "secondary.100" }} _active={{ bg: "secondary.100" }} borderRadius="md" onClick={() => setDisableEdit(true)} ><Icon as={Io5.IoSaveOutline} w="24px" h="24px" mr={2} mt="1px" /> Save</Button>
+                                            <Button color="secondary.500" bg="secondary.100" _hover={{ bg: "secondary.200" }} _focus={{ bg: "secondary.100" }} _active={{ bg: "secondary.100" }} borderRadius="md" onClick={() => setDisableEdit(true)} style={{ display: "flex", alignItems: "center" }}><Icon as={Io5.IoSaveOutline} w="24px" h="24px" mr={2} mt="1px" /> Save</Button>
                                         </>
                                     :
                                     bookingStatus === "approved" ?
                                         <>
                                             <Box px={2}>
-                                                <Text color="primary.500" lineHeight="22px" fontSize={["lg", "xl", "2xl", ""]} fontWeight="300"><Icon as={Io4.IoMdCheckmarkCircleOutline} mb="2px" mr={1} />Booking <Text as="span" fontWeight="600">Approved</Text></Text>
+                                                <Text color="primary.500" lineHeight="22px" fontSize={["lg", "xl", "2xl", ""]} fontWeight="300" style={{ display: "flex", alignItems: "center" }}><Icon as={Io4.IoMdCheckmarkCircleOutline} mb="2px" mr={1} />Booking <Text as="span" fontWeight="600">Approved</Text></Text>
                                             </Box>
                                             <Spacer />
                                             <Button w="30%" color="green.600" bg="teal.100" _hover={{ bg: "teal.200" }} _focus={{ bg: "teal.100" }} _active={{ bg: "teal.100" }} borderRadius="md" onClick={() => history.push(`/chat/who/${booking.id}`)} ><Icon as={Io5.IoChatboxEllipsesOutline} w="24px" h="24px" mr={2} mt="1px" /> Chat</Button>
@@ -316,9 +316,9 @@ export default function ViewBookedService({ setReloadPage, grayText, grayText2, 
                                                 </Box>
                                                 <Spacer />
                                                 {claimableAmount > 0 ?
-                                                    <Button color="primary.600" bg="primary.200" _hover={{ bg: "primary.300" }} _focus={{ bg: "primary.200" }} _active={{ bg: "primary.200" }} borderRadius="md" onClick={() => history.push(`/activity/who/bookings/${bookedId}/review`)} ><Icon as={BsI.BsListCheck} w="24px" h="24px" mr={2} mt="1px" /> Review User</Button>
+                                                    <Button color="primary.600" bg="primary.200" _hover={{ bg: "primary.300" }} _focus={{ bg: "primary.200" }} _active={{ bg: "primary.200" }} borderRadius="md" onClick={() => history.push(`/activity/who/bookings/${bookedId}/review`)} style={{ display: "flex", alignItems: "center" }}><Icon as={BsI.BsListCheck} w="24px" h="24px" mr={2} mt="1px" /> Review User</Button>
                                                     :
-                                                    <Button color="primary.600" bg="primary.100" _hover={{ bg: "primary.200" }} _focus={{ bg: "primary.100" }} _active={{ bg: "primary.100" }} borderRadius="md" onClick={() => history.push(`/wallet/main`)} ><Icon as={BsI.BsListCheck} w="24px" h="24px" mr={2} mt="1px" /> Go To Wallet</Button>
+                                                    <Button color="primary.600" bg="primary.100" _hover={{ bg: "primary.200" }} _focus={{ bg: "primary.100" }} _active={{ bg: "primary.100" }} borderRadius="md" onClick={() => history.push(`/wallet/main`)} style={{ display: "flex", alignItems: "center" }}><Icon as={BsI.BsListCheck} w="24px" h="24px" mr={2} mt="1px" /> Go To Wallet</Button>
                                                 }
                                             </>
                                             :
@@ -345,7 +345,7 @@ function ConfirmApproval({ handleBookingApproved, siteIsLoading }) {
 
     return (
         <>
-            <Button mx={2} minWidth="25%" color="primary.600" bg="primary.100" _hover={{ bg: "primary.200" }} _focus={{ bg: "primary.100" }} _active={{ bg: "primary.100" }} onClick={onOpen}><Icon as={Io4.IoMdCheckmarkCircleOutline} w="24px" h="24px" mr={2} mt="1px" /> Approve</Button>
+            <Button mx={2} minWidth="25%" color="primary.600" bg="primary.100" _hover={{ bg: "primary.200" }} _focus={{ bg: "primary.100" }} _active={{ bg: "primary.100" }} onClick={onOpen} style={{ display: "flex", alignItems: "center" }}><Icon as={Io4.IoMdCheckmarkCircleOutline} w="24px" h="24px" mr={2} mt="1px" /> Approve</Button>
             <AlertDialog
                 motionPreset="slideInBottom"
                 leastDestructiveRef={cancelRef}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Box, Center, Container, Text, Spacer, Icon, IconButton, useColorModeValue, Stack, useColorMode, Tabs, TabList, Tab, TabPanels, TabPanel, Flex } from "@chakra-ui/react";
+import { Button, Box, Center, Container, Text, Spacer, Icon, IconButton, Image, useColorModeValue, Stack, useColorMode, Tabs, TabList, Tab, TabPanels, TabPanel, Flex } from "@chakra-ui/react";
 import Moralis from "moralis";
 import Web3 from 'web3';
 import HDWalletProvider from '@truffle/hdwallet-provider';
@@ -12,14 +12,16 @@ import * as BiI from "react-icons/bi";
 import { useHistory, useParams } from 'react-router-dom';
 import { useMoralis } from 'react-moralis';
 import Transactions from './Transactions';
+import AvaxLogo from '../../assets/svg/AvaxLogo'
 
 
-export default function WalletMain({ ethAddress, setEthAddress, userBalances, userEthBalance }) {
+export default function WalletMain({ ethAddress, setEthAddress, userBalances, userAvaxBalance }) {
 
     const { user, setUserData, web3 } = useMoralis();
     const { colorMode } = useColorMode();
-    const [swapFrom, setSwapFrom] = useState(<Text><Icon as={FaI.FaEthereum} mr={1} mb="4px" />Ether</Text>);
-    const [swapTo, setSwapTo] = useState(<Text><Icon as={BiI.BiDollar} w={5} h={5} mb="4px" />YouWho USD</Text>);
+    const [swapFrom, setSwapFrom] = useState(<Text style={{ display: "flex", alignItems: "center" }}><AvaxLogo viewBox="0 0 12 12" style={{ marginRight: '4px' }} />AVAX</Text>);
+    // const [swapFrom, setSwapFrom] = useState(<Text style={{ display: "flex", alignItems: "center" }}><ReactSVG src='../../assets//svg/avax-logo.svg' /> AVAX</Text>);
+    const [swapTo, setSwapTo] = useState(<Text style={{ display: "flex", alignItems: "center" }}><Icon as={BiI.BiDollar} w={5} h={5} mb="4px" />YouWho USD</Text>);
 
     // const { tab, address, transType } = useParams();
     // const [encryptedEthAccount, setEncryptedEthAccount] = useState({});
@@ -41,7 +43,7 @@ export default function WalletMain({ ethAddress, setEthAddress, userBalances, us
     const grayText = colorMode === "light" ? "gray.500" : "gray.400";
     const grayText2 = colorMode === "light" ? "gray.600" : "gray.100";
 
-    if (userBalances && userEthBalance) {
+    if (userBalances && userAvaxBalance) {
 
         return (
             <Stack spacing="4">
@@ -55,10 +57,10 @@ export default function WalletMain({ ethAddress, setEthAddress, userBalances, us
                     <Text px={2} mb={2} color={grayText} fontWeight="300" fontSize="xs">Note: Clicking on a token balance will take you to Etherscan.io which contains more detailed information.</Text>
                     <Stack spacing="3" px={["0", "6", "", ""]}>
                         <Flex bg="gray.10" borderRadius="md" p={["2", "4", "", ""]} as="a" target="_blank" href={`https://testnet.snowtrace.io/address/${ethAddress}`}>
-                            <Text fontWeight="500" color="secondary.300">Ether<Icon as={HiI.HiOutlineExternalLink} ml={1} mb="3px" w={4} h={4} /></Text>
+                            <Text fontWeight="500" color="secondary.300" style={{ display: "flex", alignItems: "center" }}>Avalanche<Icon as={HiI.HiOutlineExternalLink} ml={1} mb="3px" w={4} h={4} /></Text>
                             <Spacer />
-                            <Text fontWeight="600">{Number(userEthBalance.attributes.balance / (10 ** 18)).toFixed(2)}</Text>
-                            <Text ml={1}>ETH</Text>
+                            <Text fontWeight="600">{Number(userAvaxBalance.attributes.balance / (10 ** 18)).toFixed(2)}</Text>
+                            <Text ml={1}>AVAX</Text>
                         </Flex>
                         {userBalances.map((x, i) =>
                             <Flex bg="gray.10" key={i + "flex"} borderRadius="md" p={["2", "4", "", ""]} as="a" target="_blank" href={`https://testnet.snowtrace.io/token/${x.attributes.token_address}?a=${ethAddress}`}>

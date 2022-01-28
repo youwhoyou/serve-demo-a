@@ -67,34 +67,34 @@ export default function Staking() {
             }
 
             try {
-                console.log("netId", netId);
+                // console.log("netId", netId);
                 const youC = new web3.eth.Contract(YouWho.abi, YouWho.networks[netId].address);
                 setYou(youC);
-                console.log('you contract: ', youC);
+                // console.log('you contract: ', youC);
 
                 const currYouBalance = await youC.methods.balanceOf(accounts[0]).call({ from: accounts[0] });
                 setBalance(currYouBalance);
-                console.log('currYouBalance: ', currYouBalance);
+                // console.log('currYouBalance: ', currYouBalance);
 
                 const currYouAllowance = await youC.methods.allowance(accounts[0], YouWhoDapp.networks[netId].address).call({ from: accounts[0] });
                 setMyYouAllowance(currYouAllowance);
-                console.log("myYouAllowance", currYouAllowance);
+                // console.log("myYouAllowance", currYouAllowance);
 
                 const youDappC = new web3.eth.Contract(YouWhoDapp.abi, YouWhoDapp.networks[netId].address);
                 setYouDapp(youDappC);
-                console.log('youDapp contract: ', youDappC);
+                // console.log('youDapp contract: ', youDappC);
 
                 const currYouApy = await youDappC.methods.interest_().call();
                 setYouApy(currYouApy);
-                console.log("currYouApy", currYouApy)
+                // console.log("currYouApy", currYouApy)
 
                 const myYouBalance = await youDappC.methods.youBalanceOf(accounts[0]).call({ from: accounts[0] });
                 setMyDeposit(myYouBalance);
-                console.log("myYouBalance", myYouBalance)
+                // console.log("myYouBalance", myYouBalance)
 
                 const myYouInterest = myYouBalance > 0 ? await youDappC.methods.myStakeInterest().call({ from: accounts[0] }) : 0;
                 setMyInterest(myYouInterest);
-                console.log("myYouInterest", myYouInterest)
+                // console.log("myYouInterest", myYouInterest)
 
                 setSiteIsLoading2(false);
 

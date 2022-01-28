@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { Box, Center, Container, Text, Icon, useColorModeValue, Button, Stack, useDisclosure, Heading } from "@chakra-ui/react";
+import { Box, Center, Container, Text, Icon, useColorModeValue, Button, Stack, useDisclosure, Heading, Divider } from "@chakra-ui/react";
 import Header from '../header/Header';
 import { init } from 'ityped';
 import * as FaI from 'react-icons/fa';
 import * as FiI from 'react-icons/fi';
+import { GiTap } from 'react-icons/gi';
 import * as RiI from 'react-icons/ri';
 import ModalLogin from '../login/ModalLogin';
 import { useMoralis } from "react-moralis";
@@ -48,13 +49,19 @@ export default function Home() {
                             <Text fontSize={["3.5vw", "sm", "sm", "sm"]}>Please choose whether you need a service or are a service provider.</Text>
                         </Box>
                         <Button onClick={() => history.push("/search?query=")} bg="secondary.100" _hover={{ bg: "secondary.200" }} _focus={{ bg: "secondary.100" }} _active={{ bg: "secondary.100" }} p="6">
-                            <Text fontWeight="400" color="secondary.500" fontSize="xl"><Icon as={RiI.RiUserSearchLine} fontSize={["lg", "2xl", "2xl", "2xl"]} mr="1" pb="1" />I need a<Icon as={FiI.FiCornerRightDown} fontSize={["lg", "2xl", "2xl", "2xl"]} ml="1" /></Text>
+                            <Text fontWeight="400" color="secondary.500" fontSize="xl" style={{ display: "flex", alignItems: "center" }}><Icon as={RiI.RiUserSearchLine} fontSize={["lg", "2xl", "2xl", "2xl"]} mr="1" pb="1" />I need a<Icon as={FiI.FiCornerRightDown} fontSize={["lg", "2xl", "2xl", "2xl"]} ml="1" /></Text>
                         </Button>
                         <Center minHeight="14" role="button" onClick={() => history.push("/search?query=")} >
                             <Text fontSize="4xl" id="services"></Text>
                         </Center>
                         <Button onClick={user ? () => { setYouWhoSwitch(true); window.localStorage.setItem("youWhoSwitch", true); history.push("/activity/who"); } : onOpen} bg="primary.100" _hover={{ bg: "primary.200" }} _focus={{ bg: "primary.100" }} _active={{ bg: "primary.100" }} p="6">
-                            <Text fontWeight="400" color="primary.600" fontSize="xl"><Icon as={RiI.RiServiceLine} fontSize={["lg", "2xl", "2xl", "2xl"]} mr="1" pb="1" />I am a <Icon as={FiI.FiCornerRightUp} fontSize={["lg", "2xl", "2xl", "2xl"]} /></Text>
+                            <Text fontWeight="400" color="primary.600" fontSize="xl" style={{ display: "flex", alignItems: "center" }}><Icon as={RiI.RiServiceLine} fontSize={["lg", "2xl", "2xl", "2xl"]} mr="1" pb="1" />I am a <Icon as={FiI.FiCornerRightUp} fontSize={["lg", "2xl", "2xl", "2xl"]} /></Text>
+                        </Button>
+                        <Box py="20px" w="90%" >
+                            <Divider />
+                        </Box>
+                        <Button onClick={() => history.push("/faucet")} bg="blue.100" _hover={{ bg: "blue.200" }} _focus={{ bg: "blue.100" }} _active={{ bg: "blue.100" }} p={6}>
+                            <Text fontWeight="400" color="blue.600" fontSize="xl" style={{ display: "flex", alignItems: "center" }}><Icon as={GiTap} fontSize={["lg", "2xl", "2xl", "2xl"]} mr="1" pb="1" />Get mock coins from Faucet</Text>
                         </Button>
                         <ModalLogin isOpen={isOpen} onClose={onClose} />
                     </Stack>

@@ -119,7 +119,7 @@ export default function Bookings({ grayText2, setReloadPage }) {
 
                 if (bookingPublicResult) {
                     setBookingPublic(bookingPublicResult);
-                    console.log("bookingPublic", bookingPublicResult);
+                    // console.log("bookingPublic", bookingPublicResult);
                 }
 
 

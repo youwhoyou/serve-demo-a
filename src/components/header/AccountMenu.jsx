@@ -3,7 +3,7 @@ import { Flex, Menu, MenuList, MenuItem, MenuButton, Avatar, useDisclosure, Icon
 import { useMoralis } from "react-moralis";
 import ModalLogin from '../login/ModalLogin';
 import * as BiI from "react-icons/bi";
-import * as FiI from "react-icons/fi";
+import { GiTap } from "react-icons/gi";
 import * as HiI from "react-icons/hi";
 import * as Io5 from "react-icons/io5";
 import * as CgI from "react-icons/cg";
@@ -112,7 +112,7 @@ export default function AccountMenu(props) {
                         }
                         <MenuItem justifyContent="flex-end" mt="2" px={6} >
                             <NavLink className="nav-link" to={`/faucet`} fontWeight="bold" activeStyle={{ fontWeight: "bold", color: "#ff7e4c" }} style={{ display: "flex", alignItems: "center" }}>
-                                Mock YOU & USD Faucet<Icon as={FiI.FiDollarSign} color="green.500" height="22px" width="22px" ml={2} />
+                                Mock YOU & USD Faucet<Icon as={GiTap} color="blue.500" height="22px" width="22px" ml={2} />
                             </NavLink>
                         </MenuItem>
                         <MenuItem justifyContent="flex-end" mt="2" px={6} >
@@ -153,7 +153,7 @@ export default function AccountMenu(props) {
                     <>
                         <MenuItem justifyContent="flex-end" mt="2" px={6} >
                             <NavLink className="nav-link" to={`/faucet`} fontWeight="bold" activeStyle={{ fontWeight: "bold", color: "#ff7e4c" }} style={{ display: "flex", alignItems: "center" }}>
-                                Mock YOU & USD Faucet<Icon as={FiI.FiDollarSign} color="green.500" height="22px" width="22px" ml={2} />
+                                Mock YOU & USD Faucet<Icon as={GiTap} color="blue.500" height="22px" width="22px" ml={2} />
                             </NavLink>
                         </MenuItem>
                         <MenuItem mt="2" px={6} justifyContent="flex-end" >
@@ -219,7 +219,7 @@ function ConfirmDemo({ setAcceptDemo }) {
                 <AlertDialogContent m={3} borderRadius="lg" p={2} className="bgBlurModal" >
                     <AlertDialogHeader p={4} style={{ display: "flex", alignItems: "center" }}><Icon as={BiI.BiLogIn} w={6} h={6} mr={2} />Accept Demo</AlertDialogHeader>
                     <AlertDialogBody px={6}>
-                        Please click <Text as="span" color="primary.500" fontWeight="700">Accept</Text> to confirm your understanding that this site is an early demo of <Heading as="span" fontSize="large" >youwho</Heading>'s <Heading as="span" fontSize="large" fontWeight="600" >Serve</Heading> app running on the <Text as="span" color="primary.500">Avalance Fuji Testnet</Text>, and is by no means a representation of the finished product.<br /><br />This demo exists only to provide an early visualization of the concept of <Heading as="span" fontSize="large" >youwho</Heading>'s <Heading as="span" fontSize="large" fontWeight="600" >Serve</Heading> app, which is one of many apps that will be available as part of the <Heading as="span" fontSize="large" >youwho</Heading> <Heading as="span" fontSize="large" fontWeight="600" >Decentralized Lifestyle Ecosystem</Heading>.
+                        Please click <Text as="span" color="primary.500" fontWeight="700">Accept</Text> to confirm your understanding that this site is an early demo of <Heading as="span" fontSize="large" >youwho</Heading>'s <Heading as="span" fontSize="large" fontWeight="600" >Serve</Heading> app running on the <Text as="span" color="primary.500">Avalanche Fuji Testnet</Text>, and is by no means a representation of the finished product.<br /><br />This demo exists only to provide an early visualization of the concept of <Heading as="span" fontSize="large" >youwho</Heading>'s <Heading as="span" fontSize="large" fontWeight="600" >Serve</Heading> app, which is one of many apps that will be available as part of the <Heading as="span" fontSize="large" >youwho</Heading> <Heading as="span" fontSize="large" fontWeight="600" >Decentralized Lifestyle Ecosystem</Heading>.
                     </AlertDialogBody>
                     <AlertDialogFooter p={4}>
                         <Button colorScheme="primary" onClick={() => { setAcceptDemo(true); localStorage.setItem('demo', true); onClose(); }}>

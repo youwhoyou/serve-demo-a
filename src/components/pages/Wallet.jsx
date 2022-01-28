@@ -27,7 +27,7 @@ export default function Wallet() {
     const [web3, setWeb3] = useState("");
     const [ethAddress, setEthAddress] = useState(user.attributes.ethAddress);
     const [userBalances, setUserBalances] = useState("");
-    const [userEthBalance, setUserEthBalance] = useState("");
+    const [userAvaxBalance, setUserAvaxBalance] = useState("");
     const [balance, setBalance] = useState("");
     const [errorContents, setErrorContents] = useState([]);
     const [updateBalance, setUpdateBalance] = useState(false);
@@ -37,7 +37,7 @@ export default function Wallet() {
     const location = useLocation();
     const toast = useToast();
     const toastIdToken = "token-balance-updated";
-    const toastIdEther = "ether-balance-updated";
+    const toastIdAvax = "avax-balance-updated";
 
     // const pk = require("./secrets.json").pk;
     // const rinkebySpeedyNode = require("./secrets.json").rinkebySpeedyNode;
@@ -48,7 +48,7 @@ export default function Wallet() {
     // console.log("address  transType ", (tab === undefined) ? true : false)
     // console.log("location", location)
 
-    // useMoralisSubscription("EthBalance", q => q.equalTo("address", user.attributes.ethAddress), [], {
+    // useMoralisSubscription("AvaxBalance", q => q.equalTo("address", user.attributes.ethAddress), [], {
     //     onCreate: () => {
     //         setUpdateBalance(!updateBalance);
     //     },
@@ -58,7 +58,7 @@ export default function Wallet() {
     //     // enabled: user ? true : false,
     // });
 
-    // useMoralisSubscription("EthTokenBalance", q => q.equalTo("address", user.attributes.ethAddress), [], {
+    // useMoralisSubscription("AvaxTokenBalance", q => q.equalTo("address", user.attributes.ethAddress), [], {
     //     onCreate: () => {
     //         setUpdateBalance(!updateBalance);
     //     },
@@ -69,7 +69,7 @@ export default function Wallet() {
     // });
 
     const { data: tokenData } = useMoralisQuery(
-        "EthTokenBalance",
+        "AvaxTokenBalance",
         query =>
             query
                 .equalTo("address", user.attributes.ethAddress),
@@ -101,7 +101,7 @@ export default function Wallet() {
     );
 
     const { data: ethData } = useMoralisQuery(
-        "EthBalance",
+        "AvaxBalance",
         query =>
             query
                 .equalTo("address", user.attributes.ethAddress),
@@ -110,20 +110,20 @@ export default function Wallet() {
             live: true,
             onLiveUpdate: () => {
                 setUpdateBalance(!updateBalance);
-                console.log("updated eth");
-                if (!toast.isActive(toastIdEther)) {
+                console.log("updated avax");
+                if (!toast.isActive(toastIdAvax)) {
                     toast({
-                        id: toastIdEther,
+                        id: toastIdAvax,
                         position: "top",
-                        title: "Ether Balance Updated",
-                        description: "Your Ether balance has been updated.",
+                        title: "AVAX Balance Updated",
+                        description: "Your AVAX balance has been updated.",
                         status: "success",
                         duration: 5000,
                         isClosable: true,
                         render: () => (
                             <Box as="button" textAlign="left" onClick={() => history.push("/account/events")} w={["94vw", "512px", "", ""]} position="fixed" top="0" left="50%" p={4} pb={5} ml={["-47vw", "-251px", "", ""]} color="green.600" bg="green.100" borderBottomRadius="lg">
-                                <Text fontWeight="600"><Icon as={AiI.AiOutlineExclamationCircle} mr={1} mb="4px" />Ether Balance Updated</Text>
-                                <Text>Your Ether balance has been updated.</Text>
+                                <Text fontWeight="600"><Icon as={AiI.AiOutlineExclamationCircle} mr={1} mb="4px" />AVAX Balance Updated</Text>
+                                <Text>Your AVAX balance has been updated.</Text>
                             </Box>
                         ),
 
@@ -150,8 +150,8 @@ export default function Wallet() {
             let acceptedCryptosAddresses = acceptedCryptos.attributes.acceptedCryptos.map(x => x.toLowerCase());
             setAcceptedCryptosArray(acceptedCryptosAddresses);
 
-            const EthTokenBalance = Moralis.Object.extend("EthTokenBalance");
-            let queryUserBalances = new Moralis.Query(EthTokenBalance);
+            const AvaxTokenBalance = Moralis.Object.extend("AvaxTokenBalance");
+            let queryUserBalances = new Moralis.Query(AvaxTokenBalance);
             queryUserBalances.containedIn("token_address", acceptedCryptosAddresses);
             queryUserBalances.equalTo("address", user.attributes.ethAddress);
             queryUserBalances.descending("updatedAt");
@@ -161,13 +161,13 @@ export default function Wallet() {
             setUserBalances(userBalances1);
 
 
-            const EthBalance = Moralis.Object.extend("EthBalance");
-            let queryUserEthBalance = new Moralis.Query(EthBalance);
-            queryUserEthBalance.equalTo("address", user.attributes.ethAddress);
+            const AvaxBalance = Moralis.Object.extend("AvaxBalance");
+            let queryUserAvaxBalance = new Moralis.Query(AvaxBalance);
+            queryUserAvaxBalance.equalTo("address", user.attributes.ethAddress);
 
-            let userEthBalance1 = await queryUserEthBalance.first();
-            // console.log("userEthBalance", userEthBalance1);
-            setUserEthBalance(userEthBalance1);
+            let userAvaxBalance1 = await queryUserAvaxBalance.first();
+            // console.log("userAvaxBalance", userAvaxBalance1);
+            setUserAvaxBalance(userAvaxBalance1);
 
 
             await loadBlockchainData();
@@ -192,8 +192,8 @@ export default function Wallet() {
             // console.log("netId",netId);
 
             if (typeof accounts[0] !== 'undefined') {
-                const balanceEth = await web3.eth.getBalance(accounts[0]);
-                setBalance(balanceEth);
+                const balanceAvax = await web3.eth.getBalance(accounts[0]);
+                setBalance(balanceAvax);
 
                 setEthAddress(accounts[0]);
                 // console.log("accounts[0]",accounts[0])
@@ -250,7 +250,7 @@ export default function Wallet() {
                                         ethAddress={ethAddress}
                                         setEthAddress={setEthAddress}
                                         userBalances={userBalances}
-                                        userEthBalance={userEthBalance}
+                                        userAvaxBalance={userAvaxBalance}
                                     />
                                 </TabPanel>
 

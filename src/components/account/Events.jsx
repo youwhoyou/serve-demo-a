@@ -127,8 +127,8 @@ export default function Events() {
                     <Center mb={1} mr={1} color={grayText2}>
                         <Text fontWeight="400" fontSize="3xl" ml={1} color={grayText2} style={{ display: "flex", alignItems: "center" }}><Icon as={newEvent ? BiI.BiCommentError : BiI.BiCommentDetail} color={newEvent ? "red.400" : "primary.400"} mr={2} />{newEvent ? "New Events" : "My Events"}</Text>
                         <Spacer />
-                        <Button variant="ghost" display={["block", "none", "", ""]} fontWeight="400" onClick={handleReadAll}><Icon as={Io5.IoMailOpenOutline} w={5} h={5} mb="4px" mr={1} /></Button>
-                        <Button variant="ghost" display={["none", "block", "", ""]} fontWeight="400" onClick={handleReadAll}><Icon as={Io5.IoMailOpenOutline} w={5} h={5} mb="4px" mr={1} />Read All</Button>
+                        <Button variant="ghost" display={["flex", "none", "", ""]} fontWeight="400" onClick={handleReadAll} style={{ alignItems: "center" }}><Icon as={Io5.IoMailOpenOutline} w={5} h={5} mb="4px" mr={1} /></Button>
+                        <Button variant="ghost" display={["none", "flex", "", ""]} fontWeight="400" onClick={handleReadAll} style={{ alignItems: "center" }}><Icon as={Io5.IoMailOpenOutline} w={5} h={5} mb="4px" mr={1} />Read All</Button>
                         <Divider orientation="vertical" h="24px" borderColor="gray.500" />
                         <IconButton icon={<Io5.IoArrowBack />} size="sm" ml={1} variant="ghost" fontSize="24px" onClick={() => { history.push("/account/profile"); }} />
                     </Center>
