@@ -203,7 +203,7 @@ export default function ViewBookedService({ setReloadPage, grayText, grayText2, 
                                     <ListItem>Approximate number of <Text as="span" color="primary.500" fontWeight="600">Hours Required</Text></ListItem>
                                     <ListItem><Text as="span" color="primary.500" fontWeight="600">Day & Time</Text> to provide service</ListItem>
                                     <ListItem><Text as="span" color="primary.500" fontWeight="600">Service Location</Text></ListItem>
-                                    <ListItem><Text as="span" color="primary.500" fontWeight="600">Ethereum Address</Text> to receive payment</ListItem>
+                                    <ListItem><Text as="span" color="primary.500" fontWeight="600">Avalanche Address</Text> to receive payment</ListItem>
                                 </UnorderedList>
                                 <Text>Please approve the booking by clicking on the <Text as="span" color="primary.500" fontWeight="600">Approve</Text> button below.</Text>
                                 <Stack borderBottom="1px" borderColor="gray.10"></Stack>
@@ -268,7 +268,7 @@ export default function ViewBookedService({ setReloadPage, grayText, grayText2, 
                                 </FormControl>
 
                                 <FormControl id="ethAddress" isRequired={bookingStatus === "pending" ? true : false}>
-                                    <FormLabel fontWeight="500" mt={1} color={disableEdit ? "gray.500" : "primary.300"}>Ethereum Address</FormLabel>
+                                    <FormLabel fontWeight="500" mt={1} color={disableEdit ? "gray.500" : "primary.300"}>Avalanche Address</FormLabel>
                                     <Stack spacing={3}>
                                         <Select variant="flushed" isDisabled={disableEdit} placeholder={ethAddress} value={ethAddress} onChange={e => setEthAddress(e.target.value)} />
                                         <>

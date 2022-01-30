@@ -250,7 +250,7 @@ export default function Staking() {
                                     <Text fontSize="2xl" color={grayText} ><Icon as={FaI.FaRegHandshake} mb="2px" mr={3} w="38px" h="38px" color="primary.400" />Approve Staking</Text>
                                 </Center>
                                 <Text>You must approve the staking of your <Text as="span" color="primary.500" fontWeight="600">YOU</Text> tokens first.</Text>
-                                <Text>This is a one time approval that is standard for all <Text as="span" color="primary.500" fontWeight="600">ERC-20</Text> tokens that must be completed when staking with a new <Text as="span" color="primary.500" fontWeight="600">Ethereum</Text> wallet address for the first time.</Text>
+                                <Text>This is a one time approval that is standard for all <Text as="span" color="primary.500" fontWeight="600">ERC-20</Text> tokens that must be completed when staking with a new <Text as="span" color="primary.500" fontWeight="600">Avalanche</Text> wallet address for the first time.</Text>
                                 <Text>Please click the <Text as="span" color="secondary.300" fontWeight="600">Approve Now</Text> button below to approve.</Text>
                             </Stack>
                             <Stack pt="4" m={2}>

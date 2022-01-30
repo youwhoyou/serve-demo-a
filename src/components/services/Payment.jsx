@@ -41,6 +41,7 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
     const [reviewRating, setReviewRating] = useState(35);
     const [paymentAmount, setPaymentAmount] = useState(0);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [loadingTokenPrice, setLoadingTokenPrice] = useState(false);
 
     // console.log("booking", booking);
     // console.log("bookingPublic", bookingPublic.id);
@@ -179,6 +180,7 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
 
         if (youDapp !== 'undefined') {
             try {
+                setLoadingTokenPrice(true);
                 await youDapp.methods.tokenMapping(web3.utils.asciiToHex(crypto)).call({ from: account }).then(async (result) => {
                     setCryptoDecimals(result["manualOracleDecimals"]);
                     const aggregatorV3InterfaceABI = [{ "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "description", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint80", "name": "_roundId", "type": "uint80" }], "name": "getRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "latestRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "version", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }];
@@ -188,11 +190,13 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
                         .then((roundData) => {
                             // console.log("Latest Price", roundData["answer"] / 10**cryptoDecimals);
                             setCryptoPrice(Number(roundData["answer"] / 10 ** cryptoDecimals).toFixed(2));
+                            setLoadingTokenPrice(false);
                         });
 
                 });
                 console.log("tokenMapping success");
             } catch (error) {
+                setLoadingTokenPrice(false);
                 // console.error('Error, tokenMapping: ', error);
             }
         }
@@ -216,10 +220,10 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
                     setMyYouusdAllowance(currYouusdAllowance);
 
                     console.log("approve youusd Success");
-                    setSiteIsLoading(false);
+
                     // window.location.reload();
                 });
-
+                setSiteIsLoading(false);
 
             } catch (error) {
                 console.error('Error, approval: ', error);
@@ -311,7 +315,7 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
 
 
     const options = ["AVAX", "YOUUSD"]
-    const icon = [<AvaxLogo />, <Icon as={FaI.FaDollarSign} mb="4px" mr="2px" />]
+    const icon = [<AvaxLogo viewBox="0 0 12 12" mr="2px" />, <Icon as={FaI.FaDollarSign} mr="2px" />]
 
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "Crypto",
@@ -416,15 +420,15 @@ export default function Payment({ history, grayText2, grayText, bookingId, ethAd
                                     {options.map((value, i) => {
                                         const radio = getRadioProps({ value })
                                         return (
-                                            <RadioCard key={value} {...radio}>
-                                                {icon[i]}{value}
+                                            <RadioCard key={value} {...radio} >
+                                                <Text color="#444444" style={{ display: "flex", alignItems: "center" }}>{icon[i]}{value}</Text>
                                             </RadioCard>
                                         )
                                     })}
                                 </Center>
                             </Center>
                             <Center >
-                                <Text>Currently <b>${cryptoPrice}</b> for <b>1 {crypto}</b></Text>
+                                <Text>Currently <b>${loadingTokenPrice ? <Spinner size='xs' /> : cryptoPrice}</b> for <b>1 {crypto}</b></Text>
                             </Center>
                         </Box>
 
